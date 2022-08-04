@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('email')->nullable();
+            $table->float('comission_percentage')->nullable();
             $table->timestamps();
         });
     }
