@@ -8,78 +8,141 @@ use Illuminate\Http\Request;
 class EmployeeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a specific employee
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function get(Request $request, Employee $employee)
     {
-        //
+        try {
+            return response()->json([
+                'employee' => $employee
+            ]);
+        } catch (\Exception $e) {
+            $response['message'] = $e->getMessage();
+            $response['code'] = $e->getCode();
+            return response()->json($response)->setStatusCode(400);
+        } 
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of employess
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getAll(Request $request)
     {
-        //
+        try {
+            $filters = $request->only('filters');
+
+            // dd($filters);
+            $employees = Employee::query()
+                ->filters($filters)
+                ->get()
+                ->toArray();
+
+            return response()->json([
+                'count' => count($employees),
+                'data' => $employees
+            ]);
+        } catch (\Exception $e) {
+            $response['message'] = $e->getMessage();
+            $response['code'] = $e->getCode();
+            return response()->json($response)->setStatusCode(400);
+        } 
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create a new employee
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
-        //
+        try {
+            $this->validateRequest($request);
+
+            $employee = Employee::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'comission_percentage' => Employee::defaultComissionPercentage,
+            ]);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Vendedor criado com sucesso.',
+                'employee' => [
+                    'id' => $employee->id,
+                    'name' => $employee->name,
+                    'email' => $employee->email,
+                ]
+            ]);
+        } catch (\Exception $e) {
+            $response['message'] = $e->getMessage();
+            $response['code'] = $e->getCode();
+            return response()->json($response)->setStatusCode(400);
+        } 
     }
 
     /**
-     * Display the specified resource.
+     * Update the specified employee
      *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Employee  $employee
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Models\Employee $employee
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Employee $employee)
     {
-        //
+        try {
+            $this->validateRequest($request);
+
+            $employee->name = $request->name;
+            $employee->email = $request->email;
+            $employee->save();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => "Vendedor editado com sucesso.",
+                'employee' => $employee
+            ]);
+        } catch (\Exception $e) {
+            $response['message'] = $e->getMessage();
+            $response['code'] = $e->getCode();
+            return response()->json($response)->setStatusCode(400);
+        }
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified employee
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Models\Employee $employee
      * @return \Illuminate\Http\Response
      */
     public function destroy(Employee $employee)
     {
-        //
+        try {
+            $employee->delete();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => "Vendedor removido com sucesso.",
+                'employee' => $employee
+            ]);
+        } catch (\Exception $e) {
+            $response['message'] = $e->getMessage();
+            $response['code'] = $e->getCode();
+            return response()->json($response)->setStatusCode(400);
+        }
+    }
+
+    /**
+     * Validate request
+     * @param Request $request
+    */
+    private function validateRequest(Request $request) {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email:rfc',
+        ]);
     }
 }
