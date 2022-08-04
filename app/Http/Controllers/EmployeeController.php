@@ -9,7 +9,8 @@ class EmployeeController extends Controller
 {
     /**
      * Display a specific employee
-     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Models\Employee $employee
      * @return \Illuminate\Http\Response
      */
     public function get(Request $request, Employee $employee)
@@ -27,7 +28,7 @@ class EmployeeController extends Controller
 
     /**
      * Display a listing of employess
-     *
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function getAll(Request $request)
