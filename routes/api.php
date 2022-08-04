@@ -22,10 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Employees (Vendedores)
-Route::get('/employees/get/{employee}', [EmployeeController::class, 'get']);
-Route::get('/employees/get-all', [EmployeeController::class, 'getAll']);
-Route::post('/employees/create', [EmployeeController::class, 'create']);
-Route::post('/employees/update/{employee}', [EmployeeController::class, 'update']);
+Route::get('/employee/get/{employee}', [EmployeeController::class, 'get']);
+Route::get('/employee/get-all', [EmployeeController::class, 'getAll']);
+Route::post('/employee/create', [EmployeeController::class, 'create']);
+Route::post('/employee/update/{employee}', [EmployeeController::class, 'update']);
+Route::delete('/employee/delete/{employee}', [EmployeeController::class, 'delete']);
 
 // Orders (Vendas)
-Route::resource('orders', OrderController::class);
+Route::post('/order/create', [OrderController::class, 'create']);

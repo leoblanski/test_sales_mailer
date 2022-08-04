@@ -119,9 +119,10 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function delete(Employee $employee)
     {
         try {
+            //Fazer validação para não permitir remover vendedor que já tenha vendas.
             $employee->delete();
 
             return response()->json([
