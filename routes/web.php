@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
-Auth::routes();
+//Tratativa para qualquer endereço direcionar para a view com vue.
+Route::get('/{any}', [App\Http\Controllers\SPAController::class, 'index'])->where('any', '.*');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Auth::routes();

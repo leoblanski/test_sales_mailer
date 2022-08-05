@@ -1,8 +1,8 @@
 <template>
     <div>
-        <router-link :to="{name: 'home'}">Início</router-link>
-        <router-link :to="{name: 'employees'}">Vendedores</router-link>
-        <router-link :to="{name: 'orders'}">Vendas</router-link>
+        <router-link to="/">Início</router-link>
+        <router-link to="/employees">Vendedores</router-link>
+        <router-link to="/orders">Vendas</router-link>
 
         <div class="container">
             <p>teste</p>

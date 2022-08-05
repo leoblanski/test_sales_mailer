@@ -1,22 +1,42 @@
 {
-    "private": true,
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build"
-    },
-    "devDependencies": {
-        "@popperjs/core": "^2.10.2",
-        "@vitejs/plugin-vue": "^3.0.1",
-        "axios": "^0.27",
-        "bootstrap": "^5.1.3",
-        "laravel-vite-plugin": "^0.5.0",
-        "lodash": "^4.17.19",
-        "postcss": "^8.1.14",
-        "sass": "^1.32.11",
-        "vite": "^3.0.0",
-        "vue": "^3.2.37"
-    },
-    "dependencies": {
-        "vue-router": "^4.1.3"
-    }
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@popperjs/core": "^2.10.2",
+    "@vitejs/plugin-vue": "^3.0.1",
+    "axios": "^0.27",
+    "bootstrap": "^5.1.3",
+    "laravel-mix": "^6.0.49",
+    "laravel-vite-plugin": "^0.5.0",
+    "lodash": "^4.17.19",
+    "postcss": "^8.1.14",
+    "sass": "^1.32.11",
+    "vite": "^3.0.0",
+    "vue": "^3.2.37",
+    "vue-loader": "^16.8.3"
+  },
+  "dependencies": {
+    "vue-router": "^4.1.3"
+  },
+  "name": "tray_test",
+  "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\"></a></p>",
+  "version": "1.0.0",
+  "main": "vite.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leoblanski/tray_test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leoblanski/tray_test/issues"
+  },
+  "homepage": "https://github.com/leoblanski/tray_test#readme"
 }
