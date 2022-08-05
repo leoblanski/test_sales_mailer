@@ -21,8 +21,15 @@ class Employee extends Model
     public function scopeFilters($query, array $filters): void
     {
         if (isset($filters['id']) && $filters['id']) {
-            // dd(123);
             $query->where("employees.id", $filters['id']);
+        }
+
+        if (isset($filters['name']) && $filters['name']) {
+            $query->where("employees.name", $filters['name']);
+        }
+
+        if (isset($filters['email']) && $filters['email']) {
+            $query->where("employees.email", $filters['email']);
         }
     }
 }

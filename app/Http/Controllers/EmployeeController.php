@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -21,7 +22,7 @@ class EmployeeController extends Controller
             ]);
         } catch (\Exception $e) {
             $response['message'] = $e->getMessage();
-            $response['code'] = $e->getCode();
+            $response['status'] = 'error';
             return response()->json($response)->setStatusCode(400);
         } 
     }
@@ -34,9 +35,12 @@ class EmployeeController extends Controller
     public function getAll(Request $request)
     {
         try {
-            $filters = $request->only('filters');
-
-            // dd($filters);
+            $filters = $request->only([
+                'id',
+                'name',
+                'email',
+            ]);
+    
             $employees = Employee::query()
                 ->filters($filters)
                 ->get()
@@ -48,7 +52,7 @@ class EmployeeController extends Controller
             ]);
         } catch (\Exception $e) {
             $response['message'] = $e->getMessage();
-            $response['code'] = $e->getCode();
+            $response['status'] = 'error';
             return response()->json($response)->setStatusCode(400);
         } 
     }
@@ -80,7 +84,7 @@ class EmployeeController extends Controller
             ]);
         } catch (\Exception $e) {
             $response['message'] = $e->getMessage();
-            $response['code'] = $e->getCode();
+            $response['status'] = 'error';
             return response()->json($response)->setStatusCode(400);
         } 
     }
@@ -108,7 +112,7 @@ class EmployeeController extends Controller
             ]);
         } catch (\Exception $e) {
             $response['message'] = $e->getMessage();
-            $response['code'] = $e->getCode();
+            $response['status'] = 'error';
             return response()->json($response)->setStatusCode(400);
         }
     }
@@ -122,7 +126,15 @@ class EmployeeController extends Controller
     public function delete(Employee $employee)
     {
         try {
-            //Fazer validação para não permitir remover vendedor que já tenha vendas.
+            //Valida se o vendedor possui vendas atribuídas a ele, caso positivo não efetua a exclusão.
+            $orders = Order::query()
+                ->where('orders.employee_id', $employee->id)
+                ->first();
+
+            if ($orders) {
+                throw new \Exception("Não é possível excluir o vendedor pois o mesmo possui vendas atribuídas.");
+            }
+
             $employee->delete();
 
             return response()->json([
@@ -132,7 +144,7 @@ class EmployeeController extends Controller
             ]);
         } catch (\Exception $e) {
             $response['message'] = $e->getMessage();
-            $response['code'] = $e->getCode();
+            $response['status'] = 'error';
             return response()->json($response)->setStatusCode(400);
         }
     }
