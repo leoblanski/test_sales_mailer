@@ -68,8 +68,9 @@ class OrderController extends Controller
                 ->selectRaw("orders.id")
                 ->selectRaw("employees.name AS employee_name")
                 ->selectRaw("employees.email AS employee_email")
-                ->selectRaw("orders.comission_amount")
-                ->selectRaw("orders.created_at")
+                ->selectRaw("orders.amount")
+                ->selectRaw("orders.commission_amount")
+                ->selectRaw("DATE_FORMAT(orders.created_at, '%d/%m/%Y') as order_date")
                 ->join("employees", function ($join) {
                     $join->on("employees.id", "=", "orders.id");
                 })
