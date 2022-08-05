@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\Order;
+use App\Repositories\OrderRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,6 @@ class OrderController extends Controller
             }
 
             $order = new Order();
-            
             $order->amount = $params['amount'];
             $order->employee_id = $params['employee_id'];
             $order->commission_amount = $this->calcComission($params['amount']);;
@@ -64,19 +64,7 @@ class OrderController extends Controller
         try {
             $filters = $request->only('employee_id');
 
-            $orders = Order::query()
-                ->selectRaw("orders.id")
-                ->selectRaw("employees.name AS employee_name")
-                ->selectRaw("employees.email AS employee_email")
-                ->selectRaw("orders.amount")
-                ->selectRaw("orders.commission_amount")
-                ->selectRaw("DATE_FORMAT(orders.created_at, '%d/%m/%Y') as order_date")
-                ->join("employees", function ($join) {
-                    $join->on("employees.id", "=", "orders.id");
-                })
-                ->filters($filters)
-                ->get()
-                ->toArray();
+            $orders = (new OrderRepository)->getAllWithFilters($filters)->get()->toArray();
             
             return response()->json([
                 'count' => count($orders),
