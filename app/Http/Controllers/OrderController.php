@@ -55,6 +55,39 @@ class OrderController extends Controller
     }
 
     /**
+     * Get orders
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getAll(Request $request)
+    {
+        try {
+            $filters = $request->only('employee_id');
+
+            $orders = Order::query()
+                ->selectRaw("orders.id")
+                ->selectRaw("employees.name AS employee_name")
+                ->selectRaw("employees.email AS employee_email")
+                ->selectRaw("orders.comission_amount")
+                ->selectRaw("orders.created_at")
+                ->join("employees", function ($join) {
+                    $join->on("employees.id", "=", "orders.id");
+                })
+                ->filters($filters)
+                ->get()
+                ->toArray();
+            
+            return response()->json([
+                'count' => count($orders),
+                'data' => $orders,
+            ]);
+        } catch (\Exception $e) {
+            $response['message'] = $e->getMessage();
+            return response()->json($response)->setStatusCode(400);
+        }
+    }
+
+    /**
      * Validate request
      * @param Request $request
     */

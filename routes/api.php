@@ -30,3 +30,4 @@ Route::delete('/employee/delete/{employee}', [EmployeeController::class, 'delete
 
 // Orders (Vendas)
 Route::post('/order/create', [OrderController::class, 'create']);
+Route::get('/order/get-all', [OrderController::class, 'getAll']);
