@@ -28,6 +28,13 @@ a:visited, a:hover, a:active, a:focus {
     margin-bottom: 15px;
 }
 
+.m-l-5 {
+    margin-left: 5px;
+}
+
+.m-r-5 {
+    margin-right: 5px;
+}
 
 .teste {
     background-color: red;

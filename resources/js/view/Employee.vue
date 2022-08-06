@@ -2,7 +2,7 @@
     <loader v-if="this.loading"></loader>
     <div class="m-t-10">
         <div class="row no-gutters d-flex">
-            <h5 class="mr-auto b-t-5 m-b-5">Listagem de vendedores ({{employees.length}})</h5>
+            <h5 class="mr-auto b-t-5 m-b-5">Vendedores ({{employees.length}})</h5>
             <button class="btn btn-sm btn-success m-t-5 m-b-5" v-on:click="this.openModal(null)">Novo vendedor</button>
         </div>
         <div>
@@ -13,8 +13,7 @@
                         <th scope="col">Nome</th>
                         <th scope="col">Email</th>
                         <th scope="col">% Comissão</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
+                        <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,8 +22,10 @@
                         <td>{{employee.name}}</td>
                         <td>{{employee.email}}</td>
                         <td>{{employee.comission_percentage}}</td>
-                        <td><button type="button" class="btn btn-danger" v-on:click="this.delete(employee.id)">Excluir</button></td>
-                        <td><button type="button" class="btn btn-primary" v-on:click="this.openModal(employee)">Editar</button></td>
+                        <td>
+                            <button type="button" class="btn btn-danger" v-on:click="this.delete(employee.id)">Excluir</button>&nbsp;
+                            <button type="button" class="btn btn-primary" v-on:click="this.openModal(employee)">Editar</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -45,6 +46,10 @@
                         <div class="mb-3">
                             <label for="employee_name" class="form-label">Nome completo</label>
                             <input type="text" required v-model="editForm.name" class="form-control" id="employee_name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="employee_comission" class="form-label">Comissão</label>
+                            <input type="text" readonly value="8.0" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label for="employee_email" class="form-label">Email</label>
@@ -84,7 +89,6 @@
         },
         methods: {
             getEmployees() {
-
                 this.loading = true;
 
                 axios
@@ -120,23 +124,30 @@
  
                 axios.post('/api/employee/create', this.editForm)
                     .then((res) => {
-                        this.employees = res.data.data;
+                        if (res.data.status == 'success') {
+                            alert("Vendedor cadastrado com sucesso.");
+                        }
+                        $('#employeeModal').modal('hide'); 
+                        this.loading = false;
+                        this.getEmployees();
                     })
                     .catch((error) => {
                         console.log(error);
-                        this.loading = true;
+                        this.loading = false;
                     });
             },
             delete(id) {
-                axios.delete('/api/employee/delete/' + id)
-                .then((res) => {
-                    this.getEmployees();
-                    alert("Vendedor deletado.");
-                })
-                .catch((error) => {
-                    alert(error.response.data.message);
-                    console.log(error);
-                });
+                if (confirm("Deseja deletar o vendedor? ")) {
+                    axios.delete('/api/employee/delete/' + id)
+                    .then((res) => {
+                        this.getEmployees();
+                        alert("Vendedor deletado.");
+                    })
+                    .catch((error) => {
+                        alert(error.response.data.message);
+                        console.log(error);
+                    });
+                }
             }
         }, 
     }
