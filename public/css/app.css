@@ -1,6 +1,33 @@
-.body {
-    background-color: red;
+a:visited, a:hover, a:active, a:focus {
+    color: white !important;
+    text-decoration: none !important;
+    outline: none !important;
 }
+
+.m-t-5 {
+    margin-top: 5px;
+}
+
+.m-t-10 {
+    margin-top: 10px;
+}
+
+.m-t-15 {
+    margin-top: 15px;
+}
+
+.m-b-5 {
+    margin-bottom: 5px;
+}
+
+.m-b-10 {
+    margin-bottom: 10px;
+}
+
+.m-b-15 {
+    margin-bottom: 15px;
+}
+
 
 .teste {
     background-color: red;
