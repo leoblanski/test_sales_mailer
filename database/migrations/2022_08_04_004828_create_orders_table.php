@@ -30,12 +30,14 @@ return new class extends Migration
                 [
                     'employee_id' => '1',
                     'amount' => '10.50',
-                    'commission_amount' => '8.5'
+                    'commission_amount' => '8.5',
+                    'created_at' => '2022-08-07'
                 ],
                 [
                     'employee_id' => '2',
                     'amount' => '49.90',
-                    'commission_amount' => '8.5'
+                    'commission_amount' => '8.5',
+                    'created_at' => '2022-08-07'
                 ],
             ),
         );
