@@ -29,11 +29,11 @@ class OrderRepository
         $query = Order::query()
             ->selectRaw("SUM(orders.amount) as employee_amount")
             ->selectRaw("employees.name AS employee_name")
-            ->leftJoin("employees", function ($join) {
+            ->join("employees", function ($join) {
                 $join->on("employees.id", "=", "orders.employee_id");
             })
             ->filters($filters)
-            ->groupBy("orders.employee_id");
+            ->groupBy("employees.id");
 
         return $query;
     }

@@ -22,10 +22,10 @@ class Order extends Model
             $query->where("employees.email", $filters['employee_email']);
         }
         if (isset($filters['date_begin']) && $filters['date_begin']) {
-            $query->where("orders.created_at", ">=", $filters['date_begin']);
+            $query->whereRaw("orders.created_at >= '{$filters['date_begin']} 00:00:00'");
         }
         if (isset($filters['date_until']) && $filters['date_until']) {
-            $query->where("orders.created_at", "<=", $filters['date_until']);
+            $query->whereRaw("orders.created_at <= '{$filters['date_until']} 23:59:59'");
         }
     }
 }
