@@ -1,9 +1,9 @@
 <template>
     <loader v-if="this.loading"></loader>
-    <div class="m-t-10">
+    <div class="mt-3">
         <div class="row no-gutters d-flex">
-            <h5 class="mr-auto b-t-5 m-b-5">Vendedores ({{employees.length}})</h5>
-            <button class="btn btn-sm btn-success m-t-5 m-b-5" v-on:click="this.openModal(null)">Novo vendedor</button>
+            <h5 class="mr-auto bt-1 mb-1">Vendedores ({{employees.length}})</h5>
+            <button class="btn btn-sm btn-success mt-1 mb-1" v-on:click="this.openModal(null)">Novo vendedor</button>
         </div>
         <div>
             <table class="table table-striped">
@@ -54,9 +54,6 @@
                         <div class="mb-3">
                             <label for="employee_email" class="form-label">Email</label>
                             <input type="email" required v-model="editForm.email" class="form-control" id="employee_email" aria-describedby="emailHelp">
-                        </div>
-                        <div class="m-t-10 m-b-10">
-                            <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -122,7 +119,24 @@
 
                 this.loading = true;
  
-                axios.post('/api/employee/create', this.editForm)
+                //Edição
+                if (this.editForm.id != null) {
+                    axios.post('/api/employee/update/' + this.editForm.id, this.editForm)
+                    .then((res) => {
+                        if (res.data.status == 'success') {
+                            $('#employeeModal').modal('hide'); 
+                            alert("Vendedor editado com sucesso.");
+                        }
+                        this.loading = false;
+                        this.getEmployees();
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        this.loading = false;
+                    });
+                } else {
+                //Cadastro
+                    axios.post('/api/employee/create', this.editForm)
                     .then((res) => {
                         if (res.data.status == 'success') {
                             alert("Vendedor cadastrado com sucesso.");
@@ -135,6 +149,7 @@
                         console.log(error);
                         this.loading = false;
                     });
+                }
             },
             delete(id) {
                 if (confirm("Deseja deletar o vendedor? ")) {
@@ -153,9 +168,13 @@
     }
     //Validação para travar envio formulário
     $( document ).ready(function() {
-        document.getElementById("formEmployee").addEventListener("click", function(event){
-            event.preventDefault()
-        });
+        var form = document.getElementById("formEmployee");
+
+        if (form) {
+            document.getElementById("formEmployee").addEventListener("click", function(event){
+                event.preventDefault()
+            });
+        }
     });
 
 </script>
