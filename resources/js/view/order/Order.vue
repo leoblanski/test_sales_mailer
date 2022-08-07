@@ -46,7 +46,7 @@
             <td>{{ order.order_date }}</td>
           </tr>
         </tbody>
-        <tfoot>
+        <tfoot v-if="orders.length > 0">
           <tr>
             <th></th>
             <th></th>
@@ -134,87 +134,15 @@
       </div>
     </div>
   </div>
-  <!-- Modal Config -->
-  <div
-    class="modal fade"
-    id="configModal"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="configModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="configModalLabel">
-            Parametrização E-mail
-          </h5>
-          <button
-            type="button"
-            class="close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form id="formOrder" action="#">
-          <div class="modal-body">
-            <div class="mb-3">
-              <label for="employee_email" class="form-label">Email</label>
-              <input
-                type="email"
-                required
-                v-model="config.email"
-                class="form-control"
-                id="employee_email"
-                aria-describedby="emailHelp"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="amount" class="form-label">Total da venda</label>
-              <input
-                type="text"
-                required
-                v-model="config.hour"
-                v-on:change="this.formatMoney(this)"
-                class="form-control"
-                id="amount"
-              />
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cancelar
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              v-on:click="this.saveOrder()"
-            >
-              Registrar Venda
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              v-on:click="this.saveOrder()"
-            >
-              Registrar Venda
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  <ModalConfig />
 </template>
 <script>
+import ModalConfig from './components/ModalConfig.vue'
 export default {
-  name: "Employee",
-  components: {},
+  name: "Orders",
+  components: {
+    ModalConfig
+  },
   data() {
     return {
       loading: false,
@@ -228,7 +156,6 @@ export default {
         amount: "",
       },
       newEmployee: true,
-      errors: [],
     };
   },
   created() {
@@ -324,6 +251,9 @@ export default {
       reversedVal = reversedVal.replace(new RegExp("\\" + decimal, "g"), ".");
       return (Number.isNaN(reversedVal) ? 0 : reversedVal);
     },
+    openModalSettings() {
+      $("#configModal").modal("show");
+    }
   },
 };
 //Validação para travar envio formulário
