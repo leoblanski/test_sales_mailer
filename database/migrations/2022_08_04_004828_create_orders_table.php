@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -22,6 +23,22 @@ return new class extends Migration
 
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
         });
+
+        // Insert employees
+        DB::table('orders')->insert(
+            array(
+                [
+                    'employee_id' => '1',
+                    'amount' => '10.50',
+                    'commission_amount' => '8.5'
+                ],
+                [
+                    'employee_id' => '2',
+                    'amount' => '49.90',
+                    'commission_amount' => '8.5'
+                ],
+            ),
+        );
     }
 
     /**
