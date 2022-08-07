@@ -47,8 +47,14 @@ php artisan migrate
 Acesse o projeto
 [http://localhost:8989](http://localhost:8989)
 
-### Documentação da aplicação: https://docs.google.com/document/d/1G7D3xyyCzXqqgg77kC7nQNunPG2h7Gy1TiNOSiEhXU8/edit?usp=sharing
+### Documentação da aplicação
 
-### Documentação da API: https://documenter.getpostman.com/view/7943547/VUjMoRBd
+https://docs.google.com/document/d/1G7D3xyyCzXqqgg77kC7nQNunPG2h7Gy1TiNOSiEhXU8/edit?usp=sharing
 
-### Workspace para visualização da API no Postman: https://app.getpostman.com/join-team?invite_code=180e2ac552a25f5a160a0d95ccde0e17&target_code=5a91afc273634080cd9e8b87f08873f5
+### Documentação da API
+
+https://documenter.getpostman.com/view/7943547/VUjMoRBd
+
+### Workspace para visualização da API no Postman
+
+https://app.getpostman.com/join-team?invite_code=180e2ac552a25f5a160a0d95ccde0e17&target_code=5a91afc273634080cd9e8b87f08873f5
