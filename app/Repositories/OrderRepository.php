@@ -16,7 +16,7 @@ class OrderRepository
             ->selectRaw("orders.commission_amount")
             ->selectRaw("DATE_FORMAT(orders.created_at, '%d/%m/%Y') as order_date")
             ->leftJoin("employees", function ($join) {
-                $join->on("employees.id", "=", "orders.id");
+                $join->on("employees.id", "=", "orders.employee_id");
             })
             ->filters($filters);
 
