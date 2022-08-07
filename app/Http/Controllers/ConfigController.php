@@ -12,9 +12,34 @@ class ConfigController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update(Request $request)
     {
-        //
+        try {
+            $params = $request->all();
+            $config = Config::first();
+
+            if (!$config) {
+                $config = new Config();
+                $config->email = $params['email'];
+                $config->time = $params['time'];
+            } else {
+                $config->email = $params['email'];
+                $config->time = $params['time'];
+            }
+
+            if (!$config->save()) {
+                throw new \Exception("Falha ao salvar configurações.");
+            }
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Configuração realizada com sucesso.',
+            ]);
+        } catch (\Exception $e) {
+            $response['message'] = $e->getMessage();
+            $response['status'] = 'error';
+            return response()->json($response)->setStatusCode(400);
+        }
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OrderController;
 use App\Models\Employee;
@@ -31,3 +32,8 @@ Route::delete('/employee/delete/{employee}', [EmployeeController::class, 'delete
 // Orders (Vendas)
 Route::post('/order/create', [OrderController::class, 'create']);
 Route::get('/order/get-all', [OrderController::class, 'getAll']);
+
+// Config (Configuração do envio de email)
+Route::post('/config/update', [ConfigController::class, 'update']);
+Route::get('/config/get', [ConfigController::class, 'get']);
+
