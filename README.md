@@ -2,6 +2,18 @@
 
 ### Passo a passo
 
+Faça o clone do projeto executando:
+
+```sh
+git clone https://github.com/leoblanski/tray_test.git
+```
+
+Acesse o projeto
+
+```sh
+cd tray_test
+```
+
 Crie o Arquivo .env (Todas as configurações necessárias já estão no env.example)
 ```sh
 cp .env.example .env
