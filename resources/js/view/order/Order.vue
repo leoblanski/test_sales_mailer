@@ -60,66 +60,156 @@
     </div>
   </div>
   <!-- Modal Nova Venda -->
-    <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="orderModalLabel">Registrar nova venda</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="formOrder" action="#">
-                    <div class="modal-body">
-                        <div class="mb-2">
-                            <label for="employee_id" class="form-label">Vendedor:&nbsp;</label>
-                            <select class="form-select form-select-lg" v-model="newOrder.employee_id" aria-label="Default select example">
-                                <option v-for="employee in employees" :key="employee.id" :value="employee.id">{{employee.name}}</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="amount" class="form-label">Total da venda</label>
-                            <input type="text" required v-model="newOrder.amount" v-on:change="this.formatMoney(newOrder.amount)" class="form-control" id="amount">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" v-on:click="this.saveOrder()">Registrar Venda</button>
-                    </div>
-                </form>
-            </div>
+  <div
+    class="modal fade"
+    id="orderModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="orderModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="orderModalLabel">Registrar nova venda</h5>
+          <button
+            type="button"
+            class="close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-    </div>
-    <!-- Modal Config -->
-    <div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="configModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="configModalLabel">Parametrização E-mail</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="formOrder" action="#">
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="employee_email" class="form-label">Email</label>
-                            <input type="email" required v-model="config.email" class="form-control" id="employee_email" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="amount" class="form-label">Total da venda</label>
-                            <input type="text" required v-model="config.hour" v-on:change="this.formatMoney(newOrder.amount)" class="form-control" id="amount">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" v-on:click="this.saveOrder()">Registrar Venda</button>
-                        <button type="button" class="btn btn-primary" v-on:click="this.saveOrder()">Registrar Venda</button>
-                    </div>
-                </form>
+        <form id="formOrder" action="#">
+          <div class="modal-body">
+            <div class="mb-2">
+              <label for="employee_id" class="form-label"
+                >Vendedor:&nbsp;</label
+              >
+              <select
+                class="form-select form-select-lg"
+                required
+                v-model="newOrder.employee_id"
+                aria-label="Default select example"
+              >
+                <option
+                  v-for="employee in employees"
+                  :key="employee.id"
+                  :value="employee.id"
+                >
+                  {{ employee.name }}
+                </option>
+              </select>
             </div>
-        </div>
+            <div class="mb-3">
+              <label for="amount" class="form-label">Total da venda</label>
+              <input
+                type="text"
+                required
+                v-model="newOrder.amount"
+                v-on:keyup="this.formatInputMoney()"
+                class="form-control"
+                id="amount"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              v-on:click="this.saveOrder()"
+            >
+              Registrar Venda
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
+  <!-- Modal Config -->
+  <div
+    class="modal fade"
+    id="configModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="configModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="configModalLabel">
+            Parametrização E-mail
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="formOrder" action="#">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="employee_email" class="form-label">Email</label>
+              <input
+                type="email"
+                required
+                v-model="config.email"
+                class="form-control"
+                id="employee_email"
+                aria-describedby="emailHelp"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="amount" class="form-label">Total da venda</label>
+              <input
+                type="text"
+                required
+                v-model="config.hour"
+                v-on:change="this.formatMoney(this)"
+                class="form-control"
+                id="amount"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              v-on:click="this.saveOrder()"
+            >
+              Registrar Venda
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              v-on:click="this.saveOrder()"
+            >
+              Registrar Venda
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 export default {
@@ -177,12 +267,17 @@ export default {
       $("#orderModal").modal("show");
     },
     saveOrder() {
-      $("form")[0].reportValidity();
+      $("#formOrder")[0].reportValidity();
 
       this.loading = true;
 
+      var params = {
+        'amount': this.newOrder.amount = this.unformatInputMoney(this.newOrder.amount),
+        'employee_id': this.newOrder.employee_id
+      };
+
       axios
-        .post("/api/order/create", this.newOrder)
+        .post("/api/order/create", params)
         .then((res) => {
           if (res.data.status == "success") {
             alert("Venda cadastrada com sucesso.");
@@ -192,6 +287,7 @@ export default {
 
           this.newOrder.employee_id = "";
           this.newOrder.amount = "";
+          params = {};
 
           this.getOrders();
         })
@@ -201,14 +297,32 @@ export default {
         });
     },
     calcTotals() {
-      this.orders.forEach(element => {
+      this.orders.forEach((element) => {
         this.totalAmount += parseFloat(element.amount);
         this.totalComission += parseFloat(element.commission_amount);
       });
-
     },
     formatMoney(value) {
-      return value.toString().replaceAll(".", ",").toLocaleString("pt-br", { minimumFractionDigits: 2 });
+      return parseFloat(value).toLocaleString("pt-br", {
+        minimumFractionDigits: 2,
+      });
+    },
+    formatInputMoney() {
+      var v = this.newOrder.amount.replace(/\D/g, "");
+      v = (v / 100).toFixed(2) + "";
+      v = v.replace(".", ",");
+      v = v.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
+      v = v.replace(/(\d)(\d{3}),/g, "$1.$2,");
+      this.newOrder.amount = v;
+    },
+    unformatInputMoney(val) {
+      var locale = "pt-br";
+
+      var group = new Intl.NumberFormat(locale).format(1111).replace(/1/g, "");
+      var decimal = new Intl.NumberFormat(locale).format(1.1).replace(/1/g, "");
+      var reversedVal = val.replace(new RegExp("\\" + group, "g"), "");
+      reversedVal = reversedVal.replace(new RegExp("\\" + decimal, "g"), ".");
+      return (Number.isNaN(reversedVal) ? 0 : reversedVal);
     },
   },
 };

@@ -30,7 +30,7 @@ class OrderController extends Controller
             $order = new Order();
             $order->amount = $params['amount'];
             $order->employee_id = $params['employee_id'];
-            $order->commission_amount = $this->calcComission($params['amount']);;
+            $order->commission_amount = $this->calcComission((float)$params['amount']);
 
             if (!$order->save()) {
                 throw new \Exception("Houve uma falha ao salvar a venda.");
@@ -83,7 +83,7 @@ class OrderController extends Controller
     private function validateRequest(Request $request) {
         $request->validate([
             'employee_id' => 'required|integer',
-            'amount' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'amount' => 'required',
         ]);
     }
 
@@ -93,6 +93,6 @@ class OrderController extends Controller
      * return Float amount
     */
     private function calcComission(float $amount) {
-        return number_format($amount * (Employee::defaultComissionPercentage / 100), 2);
+        return str_replace(",", "", number_format($amount * (Employee::defaultComissionPercentage / 100), 2));
     }
 }
