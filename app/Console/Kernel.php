@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\Config;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,7 +16,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        //time to send orders mail
+        $time = Config::first()->time;
+
+        $schedule->command('send:email')->dailyAt($time);
     }
 
     /**

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\JobsController;
 use App\Http\Controllers\OrderController;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -37,3 +39,9 @@ Route::get('/order/get-all', [OrderController::class, 'getAll']);
 Route::post('/config/update', [ConfigController::class, 'update']);
 Route::get('/config/get', [ConfigController::class, 'get']);
 
+// Email (Utilizado para envio de teste)
+Route::post('/mail/sendMail', [EmailController::class, 'sendMail']);
+Route::post('/mail/sendMailTester', [EmailController::class, 'sendMailTester']);
+
+// Jobs
+Route::get("/jobs/get", [JobsController::class, 'getJobs']);
