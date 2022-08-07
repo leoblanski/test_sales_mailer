@@ -327,6 +327,9 @@ export default {
         });
     },
     calcTotals() {
+      this.totalAmount = 0;
+      this.totalComission = 0;
+
       this.orders.forEach((element) => {
         this.totalAmount += parseFloat(element.amount);
         this.totalComission += parseFloat(element.commission_amount);

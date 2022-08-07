@@ -23606,6 +23606,8 @@ __webpack_require__.r(__webpack_exports__);
     calcTotals: function calcTotals() {
       var _this4 = this;
 
+      this.totalAmount = 0;
+      this.totalComission = 0;
       this.orders.forEach(function (element) {
         _this4.totalAmount += parseFloat(element.amount);
         _this4.totalComission += parseFloat(element.commission_amount);
