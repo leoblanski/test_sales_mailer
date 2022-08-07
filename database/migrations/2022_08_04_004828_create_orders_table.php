@@ -20,11 +20,9 @@ return new class extends Migration
             $table->decimal('amount', 8, 2)->default(0);
             $table->decimal('commission_amount', 8, 2)->default(0);
             $table->timestamps();
-
-            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
         });
 
-        // Insert employees
+        // Insert orders
         DB::table('orders')->insert(
             array(
                 [
@@ -50,10 +48,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->dropForeign(['employee_id']);
-        });
-
         Schema::dropIfExists('orders');
     }
 };

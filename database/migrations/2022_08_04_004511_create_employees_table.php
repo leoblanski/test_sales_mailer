@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -27,11 +28,15 @@ return new class extends Migration
             array(
                 [
                     'name' => 'Vendedor teste 1',
-                    'email' => 'vendedor1@teste.com.br'
+                    'email' => 'vendedor1@teste.com.br',
+                    'comission_percentage' => '8.5',
+                    'created_at' => Carbon::now()->format('Y-m-d'),
                 ],
                 [
                     'name' => 'Vendedor teste 2',
-                    'email' => 'vendedor2@teste.com.br'
+                    'email' => 'vendedor2@teste.com.br',
+                    'comission_percentage' => '8.5',
+                    'created_at' => Carbon::now()->format('Y-m-d'),
                 ],
             ),
         );
