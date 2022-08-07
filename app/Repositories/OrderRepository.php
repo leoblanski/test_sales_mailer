@@ -18,7 +18,8 @@ class OrderRepository
             ->leftJoin("employees", function ($join) {
                 $join->on("employees.id", "=", "orders.employee_id");
             })
-            ->filters($filters);
+            ->filters($filters)
+            ->orderBy("orders.id", "ASC");
 
         // dd($query->toSql());
         return $query;
