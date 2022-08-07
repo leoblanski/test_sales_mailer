@@ -62,7 +62,7 @@ class OrderController extends Controller
     public function getAll(Request $request)
     {
         try {
-            $filters = $request->only('employee_id');
+            $filters = $request->all();
 
             $orders = (new OrderRepository)->getAllWithFilters($filters)->get()->toArray();
             

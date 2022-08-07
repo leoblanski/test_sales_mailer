@@ -23547,6 +23547,11 @@ __webpack_require__.r(__webpack_exports__);
         employee_id: "",
         amount: ""
       },
+      filters: {
+        employee_name: "",
+        employee_id: "",
+        employee_email: ""
+      },
       newEmployee: true
     };
   },
@@ -23571,7 +23576,9 @@ __webpack_require__.r(__webpack_exports__);
     getOrders: function getOrders() {
       var _this2 = this;
 
-      axios.get("/api/order/get-all").then(function (res) {
+      axios.get("/api/order/get-all", {
+        params: this.filters
+      }).then(function (res) {
         _this2.orders = res.data.data;
 
         _this2.calcTotals();
@@ -23591,8 +23598,8 @@ __webpack_require__.r(__webpack_exports__);
       $("#formOrder")[0].reportValidity();
       this.loading = true;
       var params = {
-        'amount': this.newOrder.amount = this.unformatInputMoney(this.newOrder.amount),
-        'employee_id': this.newOrder.employee_id
+        amount: this.newOrder.amount = this.unformatInputMoney(this.newOrder.amount),
+        employee_id: this.newOrder.employee_id
       };
       axios.post("/api/order/create", params).then(function (res) {
         if (res.data.status == "success") {
@@ -23642,6 +23649,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     openModalSettings: function openModalSettings() {
       $("#configModal").modal("show");
+    },
+    openModalFilters: function openModalFilters() {
+      $("#filterModal").modal("show");
+    },
+    clearFilters: function clearFilters() {
+      this.filters.employee_id = '';
+      this.filters.employee_name = '';
+      this.filters.employee_email = '';
     }
   }
 }); //Validação para travar envio formulário
@@ -24283,6 +24298,91 @@ var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
+var _hoisted_29 = {
+  "class": "modal fade",
+  id: "filterModal",
+  tabindex: "-1",
+  role: "dialog",
+  "aria-labelledby": "filterModalLabel",
+  "aria-hidden": "true"
+};
+var _hoisted_30 = {
+  "class": "modal-dialog",
+  role: "document"
+};
+var _hoisted_31 = {
+  "class": "modal-content"
+};
+
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "modal-header"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
+  "class": "modal-title",
+  id: "filterModalLabel"
+}, "Filtros relatório"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "button",
+  "class": "close",
+  "data-bs-dismiss": "modal",
+  "aria-label": "Close"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "aria-hidden": "true"
+}, "×")])], -1
+/* HOISTED */
+);
+
+var _hoisted_33 = {
+  id: "formFilter",
+  action: "#"
+};
+var _hoisted_34 = {
+  "class": "modal-body"
+};
+var _hoisted_35 = {
+  "class": "mb-2"
+};
+
+var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "employee_id",
+  "class": "form-label"
+}, "Vendedor: ", -1
+/* HOISTED */
+);
+
+var _hoisted_37 = ["value"];
+var _hoisted_38 = {
+  "class": "mb-3"
+};
+
+var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "amount",
+  "class": "form-label"
+}, "Nome Vendedor", -1
+/* HOISTED */
+);
+
+var _hoisted_40 = {
+  "class": "mb-3"
+};
+
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "config_email",
+  "class": "form-label"
+}, "Email", -1
+/* HOISTED */
+);
+
+var _hoisted_42 = {
+  "class": "modal-footer"
+};
+
+var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "button",
+  "class": "btn btn-secondary",
+  "data-bs-dismiss": "modal"
+}, " Cancelar ", -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
 
@@ -24298,7 +24398,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "btn btn-sm btn-default mt-1 mb-1 mr-2",
     title: "Filtros",
     onClick: _cache[0] || (_cache[0] = function ($event) {
-      return _this.openModalSettings();
+      return _this.openModalFilters();
     })
   }, _hoisted_5), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-sm btn-default mt-1 mb-1 mr-2",
@@ -24370,7 +24470,57 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[6] || (_cache[6] = function ($event) {
       return _this.saveOrder();
     })
-  }, " Registrar Venda ")])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ModalConfig)], 64
+  }, " Registrar Venda ")])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal Filtros "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [_hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [_hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    "class": "form-select form-select-lg",
+    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+      return $data.filters.employee_id = $event;
+    }),
+    "aria-label": "Default select example"
+  }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.employees, function (employee) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+      key: employee.id,
+      value: employee.id
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(employee.name), 9
+    /* TEXT, PROPS */
+    , _hoisted_37);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.filters.employee_id]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [_hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+      return $data.filters.employee_name = $event;
+    }),
+    "class": "form-control",
+    id: "amount"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.filters.employee_name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [_hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "email",
+    required: "",
+    "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
+      return $data.filters.employee_email = $event;
+    }),
+    "class": "form-control",
+    id: "config_email",
+    "aria-describedby": "emailHelp"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.filters.employee_email]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [_hoisted_43, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    "class": "btn btn-danger",
+    onClick: _cache[10] || (_cache[10] = function ($event) {
+      return _this.clearFilters();
+    })
+  }, " Limpar Filtros "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    "class": "btn btn-primary",
+    "data-bs-dismiss": "modal",
+    onClick: _cache[11] || (_cache[11] = function ($event) {
+      return _this.getOrders();
+    })
+  }, " Filtrar ")])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" modal configuração email"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ModalConfig)], 64
   /* STABLE_FRAGMENT */
   );
 }
