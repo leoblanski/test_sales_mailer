@@ -14,15 +14,7 @@ use Illuminate\Support\Facades\Route;
 | API Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
 */
-
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 // Employees (Vendedores)
 Route::get('/employee/get/{employee}', [EmployeeController::class, 'get']);
@@ -34,6 +26,7 @@ Route::delete('/employee/delete/{employee}', [EmployeeController::class, 'delete
 // Orders (Vendas)
 Route::post('/order/create', [OrderController::class, 'create']);
 Route::get('/order/get-all', [OrderController::class, 'getAll']);
+Route::get('/order/get-sum-by-employee', [OrderController::class, 'getSumByEmployee']);
 
 // Config (Configuração do envio de email)
 Route::post('/config/update', [ConfigController::class, 'update']);
@@ -41,7 +34,6 @@ Route::get('/config/get', [ConfigController::class, 'get']);
 
 // Email (Utilizado para envio de teste)
 Route::post('/mail/sendMail', [EmailController::class, 'sendMail']);
-Route::post('/mail/sendMailTester', [EmailController::class, 'sendMailTester']);
 
 // Jobs
 Route::get("/jobs/get", [JobsController::class, 'getJobs']);
