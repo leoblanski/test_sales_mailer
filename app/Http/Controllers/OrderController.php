@@ -77,6 +77,28 @@ class OrderController extends Controller
     }
 
     /**
+     * Get sum by employee
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getSumByEmployee(Request $request)
+    {
+        try {
+            $filters = $request->all();
+
+            $orders = (new OrderRepository)->getOrdersByEmployee($filters)->get()->toArray();
+            
+            return response()->json([
+                'count' => count($orders),
+                'data' => $orders,
+            ]);
+        } catch (\Exception $e) {
+            $response['message'] = $e->getMessage();
+            return response()->json($response)->setStatusCode(400);
+        }
+    }
+
+    /**
      * Validate request
      * @param Request $request
     */

@@ -56,6 +56,14 @@
             </button>
             <button
               type="button"
+              class="btn btn-success"
+              data-bs-dismiss="modal"
+              v-on:click="this.sendTest()"
+            >
+              Testar envio
+            </button>
+            <button
+              type="button"
               class="btn btn-primary"
               v-on:click="this.updateConfig()"
             >
@@ -106,6 +114,21 @@ export default {
         .then((res) => {
           if (res.data.status == "success") {
             alert("Configuração realizada com sucesso.");
+          }
+          this.loading = false;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.loading = false;
+        });
+    },
+    sendTest() {
+        axios
+        .post("/api/mail/sendMail", this.configForm)
+        .then((res) => {
+          if (res.data.status == "success") {
+            alert(res.data.message);
+
           }
           this.loading = false;
         })

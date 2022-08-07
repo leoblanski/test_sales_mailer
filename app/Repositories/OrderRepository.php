@@ -21,7 +21,20 @@ class OrderRepository
             ->filters($filters)
             ->orderBy("orders.id", "ASC");
 
-        // dd($query->toSql());
+        return $query;
+    }
+
+    public function getOrdersByEmployee(Array $filters)
+    {
+        $query = Order::query()
+            ->selectRaw("SUM(orders.amount) as total_amount")
+            ->selectRaw("employees.name AS employee_name")
+            ->leftJoin("employees", function ($join) {
+                $join->on("employees.id", "=", "orders.employee_id");
+            })
+            ->filters($filters)
+            ->groupBy("orders.employee_id");
+
         return $query;
     }
 }

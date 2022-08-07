@@ -21,5 +21,11 @@ class Order extends Model
         if (isset($filters['employee_email']) && $filters['employee_email']) {
             $query->where("employees.email", $filters['employee_email']);
         }
+        if (isset($filters['date_begin']) && $filters['date_begin']) {
+            $query->where("orders.created_at", ">=", $filters['date_begin']);
+        }
+        if (isset($filters['date_until']) && $filters['date_until']) {
+            $query->where("orders.created_at", "<=", $filters['date_until']);
+        }
     }
 }
