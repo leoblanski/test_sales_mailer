@@ -44,6 +44,11 @@ Execute as migrations do projeto
 php artisan migrate
 ```
 
+Para que seja possível o envio dos e-mails, precisa iniciar o Worker dos Jobs, para isso execute:
+```sh
+php artisan queue:work
+```
+
 Acesse o projeto
 [http://localhost:8989](http://localhost:8989)
 

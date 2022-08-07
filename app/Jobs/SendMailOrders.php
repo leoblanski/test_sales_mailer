@@ -48,10 +48,11 @@ class SendMailOrders implements ShouldQueue
 
         $data = [
             'orders' => $orders,
-            'subject' => 'teste',
-            'subject' => 'teste',
+            'email' => 'leo_blanski@hotmail.com',
+            'subject' => 'Vendas do dia ' . Carbon::now()->format("d/m/Y"),
+            'date' => Carbon::now()->format("d/m/Y"),
         ];
 
-        Mail::to($this->email)->send(new OrderMailer($data));
+        Mail::to($data['email'])->send(new OrderMailer($data));
     }
 }

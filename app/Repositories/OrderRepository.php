@@ -27,7 +27,7 @@ class OrderRepository
     public function getOrdersByEmployee(Array $filters)
     {
         $query = Order::query()
-            ->selectRaw("SUM(orders.amount) as total_amount")
+            ->selectRaw("SUM(orders.amount) as employee_amount")
             ->selectRaw("employees.name AS employee_name")
             ->leftJoin("employees", function ($join) {
                 $join->on("employees.id", "=", "orders.employee_id");

@@ -32,19 +32,15 @@ class OrderMailer extends Mailable
     {
         $address = $this->data['email'];
         $subject = $this->data['subject'];
-        $data = $this->data;
         $name = env("MAIL_FROM_NAME");
 
-        $headerData = [
-            'category' => 'category',
-        ];
-
         return $this->view('email.orders')
-                    ->from($address, $name)
+                    ->from(env("MAIL_FROM_ADDRESS"), $name)
+                    ->to($address)
                     ->cc($address, $name)
                     ->bcc($address, $name)
                     ->replyTo($address, $name)
                     ->subject($subject)
-                    ->with([ 'data' => $data]);
+                    ->with([ 'data' => $this->data]);
     }
 }

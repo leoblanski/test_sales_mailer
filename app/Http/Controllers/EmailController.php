@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Mail\OrderMailer;
+use App\Repositories\OrderRepository;
 use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller

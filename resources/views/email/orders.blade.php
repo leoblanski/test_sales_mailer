@@ -7,21 +7,10 @@
   <body>
     <h2>Vendas do dia <?= $data['date']; ?></h2>
     <br>
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Vendedor</th>
-            <th scope="col">Total de vendas</th>
-          </tr>
-        </thead>
-        <tbody>
-            <?php foreach($data['orders'] as $key=>$value): ?>
-                <tr>
-                    <th><?= $value['employee_name'] ?></th>
-                    <td><?= $value['total_amount'] ?></td>
-                </tr>
-            <?php endforeach ?>
-        </tbody>
-      </table>
+    <?php foreach($data['orders'] as $key=>$value): ?>
+        Vendedor: R$<?= str_replace(".", ",", $value['employee_name']) ?>
+        Total em vendas: R$<?= str_replace(".", ",", $value['employee_amount']) ?>
+        <br>
+    <?php endforeach ?>
   </body>
 </html>
