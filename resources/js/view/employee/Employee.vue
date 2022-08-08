@@ -90,7 +90,7 @@
               <label for="employee_comission" class="form-label"
                 >Comissão</label
               >
-              <input type="text" readonly value="8.0" class="form-control" />
+              <input type="text" readonly value="8.5" class="form-control" />
             </div>
             <div class="mb-3">
               <label for="employee_email" class="form-label">Email</label>
