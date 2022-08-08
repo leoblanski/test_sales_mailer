@@ -23987,7 +23987,7 @@ var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 }, "Comissão"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
   type: "text",
   readonly: "",
-  value: "8.0",
+  value: "8.5",
   "class": "form-control"
 })], -1
 /* HOISTED */
