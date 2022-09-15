@@ -11,13 +11,13 @@ Além desta implementação, realizar a criação de uma plataforma para intera�
 Faça o clone do projeto executando:
 
 ```sh
-git clone https://github.com/leoblanski/tray_test.git
+git clone https://github.com/leoblanski/test_sales_mailer.git
 ```
 
 Acesse o projeto
 
 ```sh
-cd tray_test
+cd test_sales_mailer
 ```
 
 Crie o Arquivo .env (Todas as configurações necessárias já estão no env.example)
