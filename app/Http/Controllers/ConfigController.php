@@ -20,12 +20,10 @@ class ConfigController extends Controller
 
             if (!$config) {
                 $config = new Config();
-                $config->email = $params['email'];
-                $config->time = $params['time'];
-            } else {
-                $config->email = $params['email'];
-                $config->time = $params['time'];
             }
+
+            $config->email = $params['email'];
+            $config->time = $params['time'];
 
             if (!$config->save()) {
                 throw new \Exception("Falha ao salvar configurações.");
