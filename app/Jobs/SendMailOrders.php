@@ -2,6 +2,9 @@
 
 namespace App\Jobs;
 
+use App\Mail\Mailer;
+use App\Mail\MailBase;
+use App\Mail\MailTemplate;
 use App\Mail\OrderMailer;
 use App\Models\Order;
 use App\Repositories\OrderRepository;
@@ -46,15 +49,24 @@ class SendMailOrders implements ShouldQueue
         ->get()
         ->toArray();
 
+        $subject = 'Vendas do dia ' . Carbon::now()->format("d/m/Y");
+
         $data = [
             'orders' => $orders,
             'email' => $this->email,
-            'subject' => 'Vendas do dia ' . Carbon::now()->format("d/m/Y"),
+            'subject' => $subject,
             'date' => Carbon::now()->format("d/m/Y"),
         ];
 
-        print_r("\n ====> Enviando e-mail para ". $data['email']);
+        $mail = new MailTemplate();
+        $mail->setEmail($this->email)
+            ->setSubject($subject)
+            ->setView('email.orders')
+            ->setData($data);
 
-        Mail::to($data['email'])->send(new OrderMailer($data));
+        print_r("\n ====> Enviando e-mail para ". $this->email);
+
+        $mailer = new Mailer($mail);
+        $mailer->build()->process();
     }
 }
