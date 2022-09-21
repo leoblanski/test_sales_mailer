@@ -28,4 +28,6 @@ class Order extends Model
             $query->whereRaw("orders.created_at <= '{$filters['date_until']} 23:59:59'");
         }
     }
+
+    
 }

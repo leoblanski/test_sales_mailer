@@ -86,7 +86,7 @@ class OrderController extends Controller
         try {
             $filters = $request->all();
 
-            $orders = (new OrderRepository)->getOrdersByEmployee($filters)->get()->toArray();
+            $orders = (new OrderRepository)->getSumOrdersByEmployee($filters)->get()->toArray();
             
             return response()->json([
                 'count' => count($orders),

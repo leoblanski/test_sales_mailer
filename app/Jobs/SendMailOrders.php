@@ -42,7 +42,7 @@ class SendMailOrders implements ShouldQueue
      */
     public function handle()
     {
-        $orders = (new OrderRepository)->getOrdersByEmployee([
+        $orders = (new OrderRepository)->getSumOrdersByEmployee([
             'date_begin' => Carbon::now()->format("Y-m-d"),
             'date_until' => Carbon::now()->format("Y-m-d"),
         ])

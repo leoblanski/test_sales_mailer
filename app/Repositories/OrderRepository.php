@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Order;
 
-class OrderRepository
+class OrderRepository implements RepositoryInterface
 {
     public function getAllWithFilters(array $filters)
     {
@@ -24,7 +24,7 @@ class OrderRepository
         return $query;
     }
 
-    public function getOrdersByEmployee(Array $filters)
+    public function getSumOrdersByEmployee(Array $filters)
     {
         $query = Order::query()
             ->selectRaw("SUM(orders.amount) as employee_amount")

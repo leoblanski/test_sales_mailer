@@ -37,4 +37,3 @@ Route::post('/mail/sendMail', [EmailController::class, 'sendMail']);
 
 // Jobs
 Route::get("/jobs/get", [JobsController::class, 'getJobs']);
-Route::post("/jobs/remove-all", [JobsController::class, 'removeAll']);
