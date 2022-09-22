@@ -1,8 +1,10 @@
 ## Teste técnico
 
-No teste foi solicitado que fosse desenvolvido uma API em Laravel, na qual realizasse o cadastro de vendedores, vendas (Calculando uma comissão de 8.5%) e ao final de cada dia, realizar o desparo de um e-mail com os totais de venda do dia em questão.
+No teste foi solicitado que fosse desenvolvido uma API em Laravel, na qual realizasse o cadastro de vendedores, vendas (Calculando uma comissão de 8.5%) e ao final de cada dia, realizar o disparo de um e-mail (Simulação de envio pelo mailtrap) com os totais de venda do dia em questão.
 
 Além desta implementação, realizar a criação de uma plataforma para interações com a API, podendo ser desenvolvido em PHP ou Vue (Optei por utilizar Vue).
+
+Foram aplicados alguns padrões de arquitetura, object calisthenics, testes automatizados utilizando PHP Unit, criação de configuração para CI do Gitlab, dentre outras questões que podem ser vistas no projeto. 
 
 ## Inicialização do projeto
 
