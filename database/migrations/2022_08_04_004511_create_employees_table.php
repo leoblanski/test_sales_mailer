@@ -24,22 +24,22 @@ return new class extends Migration
         });
 
         // Insert employees
-        DB::table('employees')->insert(
-            array(
-                [
-                    'name' => 'Vendedor teste 1',
-                    'email' => 'vendedor1@teste.com.br',
-                    'comission_percentage' => '8.5',
-                    'created_at' => Carbon::now()->format('Y-m-d'),
-                ],
-                [
-                    'name' => 'Vendedor teste 2',
-                    'email' => 'vendedor2@teste.com.br',
-                    'comission_percentage' => '8.5',
-                    'created_at' => Carbon::now()->format('Y-m-d'),
-                ],
-            ),
-        );
+        // DB::table('employees')->insert(
+        //     array(
+        //         [
+        //             'name' => 'Vendedor teste 1',
+        //             'email' => 'vendedor1@teste.com.br',
+        //             'comission_percentage' => '8.5',
+        //             'created_at' => Carbon::now()->format('Y-m-d'),
+        //         ],
+        //         [
+        //             'name' => 'Vendedor teste 2',
+        //             'email' => 'vendedor2@teste.com.br',
+        //             'comission_percentage' => '8.5',
+        //             'created_at' => Carbon::now()->format('Y-m-d'),
+        //         ],
+        //     ),
+        // );
     }
 
     /**

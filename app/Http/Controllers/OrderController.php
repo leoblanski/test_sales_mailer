@@ -49,6 +49,7 @@ class OrderController extends Controller
             ]);
         } catch (\Exception $e) {
             $response['message'] = $e->getMessage();
+            $response['status'] = 'error';
             return response()->json($response)->setStatusCode(400);
         }
         
@@ -62,7 +63,7 @@ class OrderController extends Controller
     public function getAll(Request $request)
     {
         try {
-            $filters = $request->all();
+            $filters = $request->get('filters', []);
 
             $orders = (new OrderRepository)->getAllWithFilters($filters)->get()->toArray();
             
@@ -84,9 +85,9 @@ class OrderController extends Controller
     public function getSumByEmployee(Request $request)
     {
         try {
-            $filters = $request->all();
+            $filters = $request->get('filters', []);
 
-            $orders = (new OrderRepository)->getOrdersByEmployee($filters)->get()->toArray();
+            $orders = (new OrderRepository)->getSumOrdersByEmployee($filters)->get()->toArray();
             
             return response()->json([
                 'count' => count($orders),
@@ -106,6 +107,8 @@ class OrderController extends Controller
         $request->validate([
             'employee_id' => 'required|integer',
             'amount' => 'required',
+        ], [ 
+            
         ]);
     }
 

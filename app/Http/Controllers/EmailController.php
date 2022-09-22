@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendMailOrders;
+use App\Mail\MailTemplate;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,10 +17,12 @@ class EmailController extends Controller
         try {
             $email = $request->email;
 
-            SendMailOrders::dispatch($email);
+            if (!SendMailOrders::dispatch($email)) {
+                throw new \Exception("Não foi possível agendar o envio");
+            };
 
             $response['status'] = "success";
-            $response['message'] = "Agendamento de e-mail realizado com sucesso.";
+            $response['message'] = "Agendamento de envio realizado com sucesso.";
 
             return response()->json($response);
         } catch (\Exception $e) {
