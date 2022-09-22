@@ -57,11 +57,8 @@ Para que seja possível o envio dos e-mails, precisa iniciar o Worker dos Jobs, 
 php artisan queue:work
 ```
 
-Além disso, deve ser copiado as informações de configuração do SMTP disponibilizadas na documentação da aplicação e atualizado no .env.
-```sh
-php artisan queue:work
-```
 
+Além disso, deve ser copiado as informações de configuração do SMTP disponibilizadas na documentação da aplicação e atualizado no .env.
 
 
 Acesse o projeto
