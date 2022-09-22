@@ -104,6 +104,42 @@ class EmployeeControllerTest extends TestCase
         $this->assertEquals(0, $response['count']);
     }
 
+    public function test_not_create_without_name_param()
+    {
+        $response = $this->json(
+            'POST',
+            '/api/employee/create',
+            [
+                'email' => 'teste@teste.com',
+            ],
+            []
+        );
+
+        $response->assertStatus(400);
+        $response->assertExactJson([
+            'message' => 'The name field is required.',
+            'status' => 'error'
+        ]);
+    }
+
+    public function test_not_create_without_email_param()
+    {
+        $response = $this->json(
+            'POST',
+            '/api/employee/create',
+            [
+                'name' => 'teste',
+            ],
+            []
+        );
+
+        $response->assertStatus(400);
+        $response->assertExactJson([
+            'message' => 'The email field is required.',
+            'status' => 'error'
+        ]);
+    }
+
     public function test_not_delete_with_orders()
     {
         $response = $this->json(
@@ -135,4 +171,6 @@ class EmployeeControllerTest extends TestCase
             'status' => 'success'
         ]);
     }
+
+
 }

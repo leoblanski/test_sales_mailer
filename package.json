@@ -39,5 +39,8 @@
   "bugs": {
     "url": "https://github.com/leoblanski/tray_test/issues"
   },
-  "homepage": "https://github.com/leoblanski/tray_test#readme"
+  "homepage": "https://github.com/leoblanski/tray_test#readme",
+  "config": {
+    "platform-check": false
+  }
 }
