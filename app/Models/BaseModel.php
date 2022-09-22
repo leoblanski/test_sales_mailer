@@ -12,10 +12,4 @@ class BaseModel extends Model {
 
       return $query;
   }
-
-  public function scopeParseSql($model)
-  {
-      $query = str_replace(['%', '?'], ['%%', '\'%s\''], $model->toSql());
-      return vsprintf($query, $model->getBindings());
-  }
 }
