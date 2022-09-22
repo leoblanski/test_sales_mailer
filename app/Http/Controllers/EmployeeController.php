@@ -35,12 +35,8 @@ class EmployeeController extends Controller
     public function getAll(Request $request)
     {
         try {
-            $filters = $request->only([
-                'id',
-                'name',
-                'email',
-            ]);
-    
+            $filters = $request->get('filters', []);
+
             $employees = Employee::query()
                 ->filters($filters)
                 ->get()
@@ -127,11 +123,7 @@ class EmployeeController extends Controller
     {
         try {
             //Valida se o vendedor possui vendas atribuídas a ele, caso positivo não efetua a exclusão.
-            $orders = Order::query()
-                ->where('orders.employee_id', $employee->id)
-                ->first();
-
-            if ($orders) {
+            if (Order::employeeHasOrder($employee->id)) {
                 throw new \Exception("Não é possível excluir o vendedor pois o mesmo possui vendas atribuídas.");
             }
 
@@ -140,7 +132,6 @@ class EmployeeController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => "Vendedor removido com sucesso.",
-                'employee' => $employee
             ]);
         } catch (\Exception $e) {
             $response['message'] = $e->getMessage();
