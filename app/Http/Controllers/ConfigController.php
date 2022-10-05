@@ -16,11 +16,7 @@ class ConfigController extends Controller
     {
         try {
             $params = $request->all();
-            $config = Config::first();
-
-            if (!$config) {
-                $config = new Config();
-            }
+            $config = Config::firstOrNew();
 
             $config->email = $params['email'];
             $config->time = $params['time'];
