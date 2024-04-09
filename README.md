@@ -1,77 +1,75 @@
-## Teste técnico
+## Technical Test
 
-No teste foi solicitado que fosse desenvolvido uma API em Laravel, na qual realizasse o cadastro de vendedores, vendas (Calculando uma comissão de 8.5%) e ao final de cada dia, realizar o disparo de um e-mail (Simulação de envio pelo mailtrap) com os totais de venda do dia em questão.
+For the test, it was requested to develop an API in Laravel that would handle the registration of sellers, sales (calculating a commission of 8.5%), and at the end of each day, send an email (simulation of sending via mailtrap) with the total sales of that day.
 
-Além desta implementação, realizar a criação de uma plataforma para interações com a API, podendo ser desenvolvido em PHP ou Vue (Optei por utilizar Vue).
+In addition to this implementation, create a platform for interactions with the API, which can be developed in PHP or Vue (I chose to use Vue).
 
-Foram aplicados alguns padrões de arquitetura, object calisthenics, testes automatizados utilizando PHP Unit, criação de configuração para CI do Gitlab, dentre outras questões que podem ser vistas no projeto. 
+Some architecture patterns, object calisthenics, automated tests using PHP Unit, creation of Gitlab CI configuration, among other issues can be seen in the project.
 
-## Inicialização do projeto
+## Project Initialization
 
-### Passo a passo
+### Step by Step
 
-Faça o clone do projeto executando:
+Clone the project by executing:
 
 ```sh
 git clone https://github.com/leoblanski/test_sales_mailer.git
 ```
 
-Acesse o projeto
+Access the project
 
 ```sh
 cd test_sales_mailer
 ```
 
-Crie o Arquivo .env (Todas as configurações necessárias já estão no env.example)
+Create the .env file (All necessary configurations are already in the env.example)
 ```sh
 cp .env.example .env
 ```
 
-Suba os containers do projeto
+Start the project containers
 ```sh
 docker-compose up -d
 ```
 
-Acessar o container
+Access the container
 ```sh
 docker-compose exec app bash
 ```
 
-Instalar as dependências do projeto
+Install project dependencies
 ```sh
 composer install
 ```
 
-Gerar a key do projeto Laravel
+Generate the Laravel project key
 ```sh
 php artisan key:generate
 ```
 
-Execute as migrations do projeto
+Run the project migrations
 ```sh
 php artisan migrate
 ```
 
-Para que seja possível o envio dos e-mails, precisa iniciar o Worker dos Jobs, para isso execute:
+To enable email sending, you need to start the Worker for Jobs, to do this, execute:
 ```sh
 php artisan queue:work
 ```
 
+Additionally, the SMTP configuration information provided in the application documentation should be copied and updated in the .env.
 
-Além disso, deve ser copiado as informações de configuração do SMTP disponibilizadas na documentação da aplicação e atualizado no .env.
-
-
-Acesse o projeto
+Access the project
 [http://localhost:8989](http://localhost:8989)
 
-### Documentação da aplicação
+### Application Documentation
 
 https://docs.google.com/document/d/1G7D3xyyCzXqqgg77kC7nQNunPG2h7Gy1TiNOSiEhXU8/edit?usp=sharing
 
-### Documentação da API
+### API Documentation
 
 https://documenter.getpostman.com/view/7943547/VUjMoRBd
 
-### Workspace para visualização da API no Postman
+### Postman API Workspace for Visualization
 
 https://app.getpostman.com/join-team?invite_code=180e2ac552a25f5a160a0d95ccde0e17&target_code=5a91afc273634080cd9e8b87f08873f5
